@@ -281,7 +281,7 @@
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             -->
-                    
+
                             <!-- Dropdown - Messages -->
                             <!--
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -384,9 +384,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Rentas</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Rentas 1</h1>
                     <p class="mb-4">Contenido de rentas.</p>
-                    
+
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <!-- Modal -->
@@ -683,7 +683,7 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script> 
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
