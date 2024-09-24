@@ -387,7 +387,7 @@
                     <h1 class="h3 mb-2 text-gray-800">Rentas 1</h1>
                     <p class="mb-4">Contenido de rentas.</p>
 
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                  <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -395,15 +395,19 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+      <div class="modal-header" align-items-center>
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">Información del local</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+
+       <input type="text" class="form-control"/>
+        <p>Departamento</p>
+        <p>ALEJANDRAS DEPA A , 2 Cuartos</p>
+        <p>$8,000</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
 
@@ -447,7 +451,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Departamento</td>
-                                            <td class="colorfy">ALEJANDRAS DEPA  CASA, 2 Cuartos</td>
+                                            <td class="colorfy" onclick="" type="button" data-toggle="modal" data-target="#myModal">ALEJANDRAS DEPA  CASA, 2 Cuartos</td>
                                             <td>$8,000</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
