@@ -401,13 +401,36 @@
       </div>
       <div class="modal-body">
 
-       <input type="text" class="form-control"/>
-        <p>Departamento</p>
-        <p>ALEJANDRAS DEPA A , 2 Cuartos</p>
-        <p>$8,000</p>
+      <div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Departamento
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Departamento</a>
+    <a class="dropdown-item" href="#">Local</a>
+  </div>
+</div>
+<br><br>
+       <input type="text" placeholder="Nombre" class="form-control" value="ALEJANDRAS DEPA A , 2 Cuartos"/>
+       <br>
+       <input type="text" placeholder="Renta" class="form-control" value="8000"/>
+       <br>
+       <input type="text" placeholder="No. predial" class="form-control" value="1234567890"/> <br>
+       <input type="text" placeholder=".png .jpeg" class="form-control" value=""/>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar imagen</button><br><br>
+       <input type="text" placeholder="contrato en formato pdf" class="form-control" value=""/>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar PDF</button>
+       <br><br>
+
+       <div class="form-group">
+    <label for="exampleFormControlTextarea1">Comentarios</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+  </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
 
