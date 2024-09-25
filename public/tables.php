@@ -430,13 +430,12 @@
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
       </div>
     </div>
 
   </div>
 </div>
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -445,8 +444,10 @@
                         <div class="card-body">
 
 
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
                                     <thead>
                                         <tr>
                                             <th>Tipo</th>
