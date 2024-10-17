@@ -1,3 +1,12 @@
+
+<?php
+    $con = mysqli_connect("35.194.11.126","usrsondealo" ,"srk142536","base1");
+
+    if (mysqli_connect_errno())
+    {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
