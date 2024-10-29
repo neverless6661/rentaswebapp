@@ -1,11 +1,9 @@
-
 <?php
-    $con = mysqli_connect("35.194.11.126","usrsondealo" ,"srk142536","base1");
+$con = mysqli_connect("35.194.11.126", "usrsondealo", "srk142536", "base1");
 
-    if (mysqli_connect_errno())
-    {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    }
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +29,12 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!--
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 
 </head>
 
@@ -286,13 +290,13 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <!--
+                        <!--
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             -->
 
-                            <!-- Dropdown - Messages -->
-                            <!--
+                        <!-- Dropdown - Messages -->
+                        <!--
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -396,19 +400,22 @@
                     <h1 class="h3 mb-2 text-gray-800">Rentas 1</h1>
                     <p class="mb-4">Contenido de rentas.</p>
 
-                  <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+                    <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+                    <!---------------------- Modal ----------------->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header" align-items-center>
-        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-        <h4 class="modal-title">Información del local</h4>
-      </div>
-      <!--- TABS --->
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" align-items-center>
+                                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                                    <h4 class="modal-title">Información del local</h4>
+                                </div>
+                                <!----------------- TABS --------------------->
+
+
+                                <!--
       <br>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -426,6 +433,266 @@
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
 </div>
+
+-->
+
+                                <!--
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">×</button>
+  <h3 ng-hide="newUser">Heading</h3>
+</div>
+
+
+<ul class="nav nav-tabs" id="tabContent">
+    <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+    <li><a href="#access-security" data-toggle="tab">Access / Security</a></li>
+    <li><a href="#networking" data-toggle="tab">Networking</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="details">
+
+            Details tab
+       <div class="control-group">
+           <label class="control-label">Instance Name</label>
+       </div>
+    </div>
+
+    <div class="tab-pane" id="access-security">
+        content 0
+    </div> 
+    <div class="tab-pane" id="networking">
+        content 1
+    </div> 
+</div>
+-->
+
+                                <!--
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+
+
+
+        
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+
+                                <div class="row">
+                                    <div class="col-md-12 purplebg m">
+                                        <div class="tabbable">
+                                            <!-- Nav tabs -->
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li role="presentation" class="nav-item active"><a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab">Departamento</a>
+                                                </li>
+                                                <li role="presentation"><a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Inquilino</a>
+                                                </li>
+                                                <li role="presentation"><a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Facturación</a>
+                                                </li>
+                                                <li role="presentation"><a class="nav-link" href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Historial</a>
+                                                </li>
+                                            </ul>
+
+                                            <!-- Tab panes -->
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="home">
+                                                    <div class="modal-body">
+
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Departamento
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="#">Departamento</a>
+                                                                <a class="dropdown-item" href="#">Local</a>
+                                                            </div>
+                                                        </div>
+                                                        <br><br>
+                                                        <input type="text" placeholder="Nombre" class="form-control" value="ALEJANDRAS DEPA A , 2 Cuartos" />
+                                                        <br>
+                                                        <input type="text" placeholder="Renta" class="form-control" value="8000" />
+                                                        <br>
+                                                        <input type="text" placeholder="No. predial" class="form-control" value="1234567890" /> <br>
+                                                        <input type="text" placeholder=".png .jpeg" class="form-control" value="" />
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar imagen</button><br><br>
+                                                        <input type="text" placeholder="contrato en formato pdf" class="form-control" value="" />
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar PDF</button>
+                                                        <br><br>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Servicios</label>
+
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                                <label class="form-check-label" for="flexCheckDefault">
+                                                                    Agua
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                                <label class="form-check-label" for="flexCheckChecked">
+                                                                    Luz
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                                <label class="form-check-label" for="flexCheckDefault">
+                                                                    Internet
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                                                <label class="form-check-label" for="flexCheckChecked">
+                                                                    Gas
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div role="tabpanel" class="tab-pane" id="profile">
+                                                    <div class="modal-body">
+
+
+                                                        <input type="text" placeholder="Nombre" class="form-control" value="Juan Perez" />
+                                                        <br>
+                                                        <input type="text" placeholder="Bienes raíces" class="form-control" value="Pepe Pecas" />
+                                                        <br>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Persona Física
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="#">Persona Física</a>
+                                                                <a class="dropdown-item" href="#">Persona Moral</a>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+
+                                                        <div class="form-group form-check">
+                                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                            <label class="form-check-label" for="exampleCheck1">Facturación</label>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Día de pago</label>
+                                                            <input type="text" placeholder="Día" class="form-control" value="15" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Último pago</label>
+                                                            <input type="text" placeholder="Último pago" class="form-control" value="16/10/2024" />
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Comentarios</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="messages">
+
+                                                    <div class="modal-body">
+
+
+                                                        <input type="text" placeholder="RFC" class="form-control" value="AAAA000000" />
+                                                        <br>
+                                                        <input type="text" placeholder="Nombre fiscal" class="form-control" value="Nombre Fiscal" />
+                                                        <br>
+                                                        <input type="text" placeholder="Correo electrónico" class="form-control" value="correo@mail.com" />
+                                                        <br>
+                                                        <label for="exampleFormControlTextarea1">Régimen Físcal</label><br>
+                                                        <div class="btn-group">
+
+                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                01
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="#">01</a>
+                                                                <a class="dropdown-item" href="#">02</a>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+
+
+                                                        <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Comentarios</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="settings">
+                                                    <div class="modal-body">
+
+
+                                                        
+                                                        <label for="exampleFormControlTextarea1">No hay registros</label><br>
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--
+<div class="tabbable">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="#AAA" data-toggle="tab">
+                                    Departamento
+                                </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#BBB" data-toggle="tab">
+                                    Inquilino
+                                </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#CCC" data-toggle="tab">
+                                    Facturación
+                                </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#DDD" data-toggle="tab">
+                                    Historial
+                                </a>
+                        </li>
+                    </ul>
+
+     <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="#AAA">Home</div>
+        <div role="tabpanel" class="tab-pane" id="#BBB">Profile</div>
+        <div role="tabpanel" class="tab-pane" id="#CCC">Message</div>
+        <div role="tabpanel" class="tab-pane" id="#DDD">Settings</div>
+     </div>
+</div>
+-->
+
+                                <!---------------------- END TAB ------------------>
+
+                                <!----------------------------- MODAL BODY ------------------------------->
+
+                                <!--
       <div class="modal-body">
 
       <div class="btn-group">
@@ -455,14 +722,20 @@
   </div>
 
       </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
-      </div>
-    </div>
+       -->
+                                <!----------------------------- END MODAL BODY ------------------------>
 
-  </div>
-</div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--------------------------------------------- END Modal ----------------------------------------->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -502,7 +775,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Departamento</td>
-                                            <td class="colorfy" onclick="" type="button" data-toggle="modal" data-target="#myModal">ALEJANDRAS DEPA  CASA, 2 Cuartos</td>
+                                            <td class="colorfy" onclick="" type="button" data-toggle="modal" data-target="#myModal">ALEJANDRAS DEPA CASA, 2 Cuartos</td>
                                             <td>$8,000</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
@@ -512,7 +785,7 @@
                                         </tr>
                                         <tr>
                                             <td>Departamento</td>
-                                            <td >ALEJANDRAS DEPA A , 2 Cuartos</td>
+                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
                                             <td>$5,055</td>
                                             <td>08/08/2024</td>
                                             <td>1</td>
@@ -522,7 +795,7 @@
                                         </tr>
                                         <tr>
                                             <td>Departamento</td>
-                                            <td >ALEJANDRAS DEPA A , 2 Cuartos</td>
+                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
                                             <td>$5,055</td>
                                             <td>08/08/2024</td>
                                             <td>1</td>
@@ -739,6 +1012,18 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <!--
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script> -->
+
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  -->
+
 
 </body>
 
