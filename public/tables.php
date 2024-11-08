@@ -1,9 +1,42 @@
 <?php
-$con = mysqli_connect("35.194.11.126", "usrsondealo", "srk142536", "base1");
+/*
+$con = mysqli_connect("35.194.11.126", "usrsondealo", "srk142536", "rentas");
 
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+$sql = "SELECT asignacion_lotes WHERE id_usuario = 1";
+$result = mysqli_query($con, $sql);
+*/
+// $res_id_lote = $con->query($sql_lote);
+
+//echo "ID LOTE:".$res_id_lote;
+
+$servername = "35.194.11.126";
+$username = "usrsondealo";
+$password = "srk142536";
+$dbname = "rentas";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM asignacion_lotes WHERE id_usuario = 1";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+      $id_lote = $row["id"];
+      echo "ID Lote ".$id_lote;
+    }
+  } else {
+    echo "0 results";
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
