@@ -851,26 +851,40 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                         <div class="modal-body">
                                             <form action="addlocal.php" method="POST">
-                                        <div class="btn-group">
-                                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Departamento
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Departamento</a>
-                                                    <a class="dropdown-item" href="#">Local</a>
-                                                </div>
-                                            </div>
+                                                <!--
+                                                <div class="btn-group">
+                                                    <button name="type_local" type="button"
+                                                        class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        Departamento
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" name="type_local"
+                                                            href="#">Departamento</a>
+                                                        <a class="dropdown-item" name="type_local" href="#">Local</a>
+                                                    </div>
+                                                </div> -->
+                                                <br>
 
-                                            <br><br>
-                                            <input type="text" name="nombre_local" placeholder="Nombre" class="form-control" value="" />
-                                            <br>
-                                            <input type="text" name="renta_local" placeholder="Renta ($)" class="form-control" value="" />
-                                            <br>
-                                            <input type="text" name="dia_pago" placeholder="Día de pago" class="form-control"
-                                                value="" />
-                                            <br>
+                                                <label for="select_1">Tipo:</label>
+                                                <select class="form-control" id="type_local" name="type_local">
+                                                    <option value="1">Departamento</option>
+                                                    <option value="2">Local</option>
+                                                </select>
 
+
+                                                <br>
+                                                <input type="text" name="nombre_local" placeholder="Nombre"
+                                                    class="form-control" value="" />
+                                                <br>
+                                                <input type="text" name="renta_local" placeholder="Renta ($)"
+                                                    class="form-control" value="" />
+                                                <br>
+                                                <input type="text" name="dia_pago" placeholder="Día de pago"
+                                                    class="form-control" value="" />
+                                                <br>
+
+                                                <!--
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">Servicios</label>
 
@@ -902,13 +916,12 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                         Gas
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
-
-                                            <input name="mySubmit" style="float: right;" class="btn btn-primary" type="submit"
-                                                value="Agregar"/>
-                                        </form>
-                                        <br><br>
+                                                <input name="mySubmit" style="float: right;" class="btn btn-primary"
+                                                    type="submit" value="Agregar" />
+                                            </form>
+                                            <br><br>
 
                                         </div>
 
