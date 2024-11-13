@@ -18,24 +18,38 @@ $username = "usrsondealo";
 $password = "srk142536";
 $dbname = "rentas";
 
+$id_lote = 0;
+
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM asignacion_lotes WHERE id_usuario = 1";
-$result = mysqli_query($conn, $sql);
+$sql_lote = "SELECT * FROM asignacion_lotes WHERE id_usuario = 1";
+$result_lote = mysqli_query($conn, $sql_lote);
 
-if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-      $id_lote = $row["id"];
-      echo "ID Lote ".$id_lote;
+if (mysqli_num_rows($result_lote) > 0) {
+    while ($row_lote = mysqli_fetch_assoc($result_lote)) {
+        $id_lote = $row_lote["id"];
+        echo "ID Lote " . $id_lote;
     }
-  } else {
+} else {
     echo "0 results";
-  }
+}
+
+$sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_inmueble = " . $id_lote;
+$result_inmueble = mysqli_query($conn, $sql_inmuebles);
+if (mysqli_num_rows($result_inmueble) > 0) {
+    while ($row_inmueble = mysqli_fetch_assoc($result_inmueble)) {
+
+    }
+} else {
+    echo "0 results";
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -240,8 +254,7 @@ if (mysqli_num_rows($result) > 0) {
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Buscar..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                            placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -382,8 +395,7 @@ if (mysqli_num_rows($result) > 0) {
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -421,6 +433,8 @@ if (mysqli_num_rows($result) > 0) {
                     <p class="mb-4">Contenido de rentas.</p>
 
                     <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+
 
                     <!---------------------- Modal ----------------->
                     <div id="myModal" class="modal fade" role="dialog">
@@ -480,10 +494,10 @@ if (mysqli_num_rows($result) > 0) {
 
     <div class="tab-pane" id="access-security">
         content 0
-    </div> 
+    </div>
     <div class="tab-pane" id="networking">
         content 1
-    </div> 
+    </div>
 </div>
 -->
 
@@ -495,7 +509,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 
-        
+
 
 
 
@@ -511,13 +525,21 @@ if (mysqli_num_rows($result) > 0) {
                                         <div class="tabbable">
                                             <!-- Nav tabs -->
                                             <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation" class="nav-item active"><a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab">Departamento</a>
+                                                <li role="presentation" class="nav-item active"><a
+                                                        class="nav-link active" href="#home" aria-controls="home"
+                                                        role="tab" data-toggle="tab">Departamento</a>
                                                 </li>
-                                                <li role="presentation"><a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Inquilino</a>
+                                                <li role="presentation"><a class="nav-link" href="#profile"
+                                                        aria-controls="profile" role="tab"
+                                                        data-toggle="tab">Inquilino</a>
                                                 </li>
-                                                <li role="presentation"><a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Facturación</a>
+                                                <li role="presentation"><a class="nav-link" href="#messages"
+                                                        aria-controls="messages" role="tab"
+                                                        data-toggle="tab">Facturación</a>
                                                 </li>
-                                                <li role="presentation"><a class="nav-link" href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Historial</a>
+                                                <li role="presentation"><a class="nav-link" href="#settings"
+                                                        aria-controls="settings" role="tab"
+                                                        data-toggle="tab">Historial</a>
                                                 </li>
                                             </ul>
 
@@ -527,7 +549,10 @@ if (mysqli_num_rows($result) > 0) {
                                                     <div class="modal-body">
 
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <button type="button"
+                                                                class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
                                                                 Departamento
                                                             </button>
                                                             <div class="dropdown-menu">
@@ -536,40 +561,51 @@ if (mysqli_num_rows($result) > 0) {
                                                             </div>
                                                         </div>
                                                         <br><br>
-                                                        <input type="text" placeholder="Nombre" class="form-control" value="ALEJANDRAS DEPA A , 2 Cuartos" />
+                                                        <input type="text" placeholder="Nombre" class="form-control"
+                                                            value="ALEJANDRAS DEPA A , 2 Cuartos" />
                                                         <br>
-                                                        <input type="text" placeholder="Renta" class="form-control" value="8000" />
+                                                        <input type="text" placeholder="Renta" class="form-control"
+                                                            value="8000" />
                                                         <br>
-                                                        <input type="text" placeholder="No. predial" class="form-control" value="1234567890" /> <br>
-                                                        <input type="text" placeholder=".png .jpeg" class="form-control" value="" />
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar imagen</button><br><br>
-                                                        <input type="text" placeholder="contrato en formato pdf" class="form-control" value="" />
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar PDF</button>
+                                                        <input type="text" placeholder="No. predial"
+                                                            class="form-control" value="1234567890" /> <br>
+                                                        <input type="text" placeholder=".png .jpeg" class="form-control"
+                                                            value="" />
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-dismiss="modal">Cargar imagen</button><br><br>
+                                                        <input type="text" placeholder="contrato en formato pdf"
+                                                            class="form-control" value="" />
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-dismiss="modal">Cargar PDF</button>
                                                         <br><br>
 
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Servicios</label>
 
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="flexCheckDefault">
                                                                 <label class="form-check-label" for="flexCheckDefault">
                                                                     Agua
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="flexCheckChecked" checked>
                                                                 <label class="form-check-label" for="flexCheckChecked">
                                                                     Luz
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="flexCheckDefault" checked>
                                                                 <label class="form-check-label" for="flexCheckDefault">
                                                                     Internet
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                    id="flexCheckChecked">
                                                                 <label class="form-check-label" for="flexCheckChecked">
                                                                     Gas
                                                                 </label>
@@ -585,12 +621,17 @@ if (mysqli_num_rows($result) > 0) {
                                                     <div class="modal-body">
 
 
-                                                        <input type="text" placeholder="Nombre" class="form-control" value="Juan Perez" />
+                                                        <input type="text" placeholder="Nombre" class="form-control"
+                                                            value="Juan Perez" />
                                                         <br>
-                                                        <input type="text" placeholder="Bienes raíces" class="form-control" value="Pepe Pecas" />
+                                                        <input type="text" placeholder="Bienes raíces"
+                                                            class="form-control" value="Pepe Pecas" />
                                                         <br>
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <button type="button"
+                                                                class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
                                                                 Persona Física
                                                             </button>
                                                             <div class="dropdown-menu">
@@ -602,24 +643,29 @@ if (mysqli_num_rows($result) > 0) {
                                                         <br>
 
                                                         <div class="form-group form-check">
-                                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                            <label class="form-check-label" for="exampleCheck1">Facturación</label>
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="exampleCheck1">
+                                                            <label class="form-check-label"
+                                                                for="exampleCheck1">Facturación</label>
                                                         </div>
 
 
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Día de pago</label>
-                                                            <input type="text" placeholder="Día" class="form-control" value="15" />
+                                                            <input type="text" placeholder="Día" class="form-control"
+                                                                value="15" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Último pago</label>
-                                                            <input type="text" placeholder="Último pago" class="form-control" value="16/10/2024" />
+                                                            <input type="text" placeholder="Último pago"
+                                                                class="form-control" value="16/10/2024" />
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Comentarios</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                                            <textarea class="form-control"
+                                                                id="exampleFormControlTextarea1" rows="2"></textarea>
                                                         </div>
 
                                                     </div>
@@ -629,16 +675,23 @@ if (mysqli_num_rows($result) > 0) {
                                                     <div class="modal-body">
 
 
-                                                        <input type="text" placeholder="RFC" class="form-control" value="AAAA000000" />
+                                                        <input type="text" placeholder="RFC" class="form-control"
+                                                            value="AAAA000000" />
                                                         <br>
-                                                        <input type="text" placeholder="Nombre fiscal" class="form-control" value="Nombre Fiscal" />
+                                                        <input type="text" placeholder="Nombre fiscal"
+                                                            class="form-control" value="Nombre Fiscal" />
                                                         <br>
-                                                        <input type="text" placeholder="Correo electrónico" class="form-control" value="correo@mail.com" />
+                                                        <input type="text" placeholder="Correo electrónico"
+                                                            class="form-control" value="correo@mail.com" />
                                                         <br>
-                                                        <label for="exampleFormControlTextarea1">Régimen Físcal</label><br>
+                                                        <label for="exampleFormControlTextarea1">Régimen
+                                                            Físcal</label><br>
                                                         <div class="btn-group">
 
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <button type="button"
+                                                                class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
                                                                 01
                                                             </button>
                                                             <div class="dropdown-menu">
@@ -652,7 +705,8 @@ if (mysqli_num_rows($result) > 0) {
 
                                                         <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Comentarios</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                                                            <textarea class="form-control"
+                                                                id="exampleFormControlTextarea1" rows="2"></textarea>
                                                         </div>
 
                                                     </div>
@@ -662,9 +716,10 @@ if (mysqli_num_rows($result) > 0) {
                                                     <div class="modal-body">
 
 
-                                                        
-                                                        <label for="exampleFormControlTextarea1">No hay registros</label><br>
-                                                        
+
+                                                        <label for="exampleFormControlTextarea1">No hay
+                                                            registros</label><br>
+
 
                                                     </div>
                                                 </div>
@@ -747,7 +802,8 @@ if (mysqli_num_rows($result) > 0) {
 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Guardar</button>
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
                                 </div>
                             </div>
@@ -756,11 +812,129 @@ if (mysqli_num_rows($result) > 0) {
                     </div>
 
                     <!--------------------------------------------- END Modal ----------------------------------------->
+
+
+                    <!---------------------------- START MODAL ADD LOCAL--------------------------------------------------->
+                    <div id="AddModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" align-items-center>
+
+                                    <h4 class="modal-title">Agregar local</h4>
+                                </div>
+                                <!----------------- TABS --------------------->
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12 purplebg m">
+
+
+
+                                        <!-- Tab panes -->
+
+
+                                        <div class="modal-body">
+                                            <form action="addlocal.php" method="POST">
+                                                <!--
+                                                <div class="btn-group">
+                                                    <button name="type_local" type="button"
+                                                        class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        Departamento
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" name="type_local"
+                                                            href="#">Departamento</a>
+                                                        <a class="dropdown-item" name="type_local" href="#">Local</a>
+                                                    </div>
+                                                </div> -->
+                                                <br>
+
+                                                <label for="select_1">Tipo:</label>
+                                                <select class="form-control" id="type_local" name="type_local">
+                                                    <option value="1">Departamento</option>
+                                                    <option value="2">Local</option>
+                                                </select>
+
+
+                                                <br>
+                                                <input type="text" name="nombre_local" placeholder="Nombre"
+                                                    class="form-control" value="" />
+                                                <br>
+                                                <input type="text" name="renta_local" placeholder="Renta ($)"
+                                                    class="form-control" value="" />
+                                                <br>
+                                                <input type="text" name="dia_pago" placeholder="Día de pago"
+                                                    class="form-control" value="" />
+                                                <br>
+
+                                                <!--
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Servicios</label>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Agua
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Luz
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Internet
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Gas
+                                                    </label>
+                                                </div>
+                                            </div> -->
+
+                                                <input name="mySubmit" style="float: right;" class="btn btn-primary"
+                                                    type="submit" value="Agregar" />
+                                            </form>
+                                            <br><br>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!----------------------------- END MODAL BODY ------------------------>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!------------------------------END MODAL ADD LOCAL---------------------------------------------------->
+
+
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Rentas</h6>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">+
+                                Agregar</button>
                         </div>
+
                         <div class="card-body">
 
 
@@ -793,176 +967,97 @@ if (mysqli_num_rows($result) > 0) {
                                         </tr>
                                     </tfoot>
                                     <tbody>
+
                                         <tr>
                                             <td>Departamento</td>
-                                            <td class="colorfy" onclick="" type="button" data-toggle="modal" data-target="#myModal">ALEJANDRAS DEPA CASA, 2 Cuartos</td>
-                                            <td>$8,000</td>
+                                            <td class="colorfy" onclick="" type="button" data-toggle="modal"
+                                                data-target="#myModal">ALEJANDRAS DEPA CASA, 2 Cuartos</td>
+                                            <td>$8000</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
                                         </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Departamento</td>
-                                            <td>ALEJANDRAS DEPA A , 2 Cuartos</td>
-                                            <td>$5,055</td>
-                                            <td>08/08/2024</td>
-                                            <td>1</td>
-                                            <td>01/09/2024</td>
-                                            <td>01/10/2024</td>
-                                            <td>N/A</td>
-                                        </tr>
+
+
+                                        <?php
+
+                                        $sql_renta = "SELECT * FROM asignacion_inmueble JOIN inmueble ON asignacion_inmueble.id_inmueble = inmueble.id JOIN tipo_inmueble ON inmueble.tipo = tipo_inmueble.id WHERE id_lote=" . $id_lote;
+                                        $result_renta = mysqli_query($conn, $sql_renta);
+
+                                        if (mysqli_num_rows($result_renta) > 0) {
+                                            while ($row_renta = mysqli_fetch_assoc($result_renta)) {
+                                                echo "<tr>";
+
+
+                                                echo "<td>" . $row_renta["nombre"] . "</td>";
+
+                                                echo "<td>" . $row_renta["nombre_depa"] . "</td>";
+
+                                                echo "<td> $" . $row_renta["precio_renta"] . "</td>";
+
+                                                echo "<td>" . $row_renta["dia_pago"] . "</td>";
+
+                                                $id_inmueble = $row_renta["id_inmueble"];
+
+
+                                                $sql_pago = "SELECT * FROM registro_pagos WHERE id_inmueble =" . $id_inmueble;
+                                                $result_pago = mysqli_query($conn, $sql_pago);
+                                                if (mysqli_num_rows($result_pago) > 0) {
+                                                    while ($row_pago = mysqli_fetch_assoc($result_pago)) {
+                                                        echo "<td>" . $row_pago["fecha_pago"] . "</td>";
+                                                        if ($row_pago["id_inquilino"] != NULL || $row_pago["id_inquilino"] != "") {
+                                                            $sql_inquilino = "SELECT * FROM inquilino WHERE id = " . $row_pago["id_inquilino"];
+                                                            $result_inquilino = mysqli_query($conn, $sql_inquilino);
+                                                            if (mysqli_num_rows($result_inquilino) > 0) {
+                                                                while ($row_inquilino = mysqli_fetch_assoc($result_inquilino)) {
+                                                                    if ($row_inquilino["factura_option"] != NULL || $row_inquilino["factura_option"] != "") {
+                                                                        echo "<td>Si</td>";
+                                                                    } else {
+                                                                        echo "<td>No</td>";
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                } else {
+                                                    echo "<td>N/A</td>";
+                                                    echo "<td>N/A</td>";
+                                                }
+
+
+                                                $sql_regrenta = "SELECT * FROM registro_renta WHERE id_inmueble = " . $id_inmueble;
+                                                $result_regrenta = mysqli_query($conn, $sql_regrenta);
+                                                if (mysqli_num_rows($result_regrenta) > 0) {
+                                                    while ($row_regrenta = mysqli_fetch_assoc($result_regrenta)) {
+                                                        echo "<td>" . $row_regrenta["incremento_pago"] . "</td>";
+
+                                                        $renta = $row_regrenta["precio_renta"];
+                                                        $pago = $row_regrenta["cantidad_pago"];
+                                                        $deuda = $renta - $pago;
+
+                                                        echo "<td> $" . $deuda . "</td>";
+                                                    }
+                                                } else {
+                                                    echo "<td>N/A</td>";
+                                                    echo "<td>N/A</td>";
+                                                }
+
+
+
+
+
+
+
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            // echo "0 results";
+                                        }
+
+                                        ?>
+
                                     </tbody>
                                 </table>
                             </div>
