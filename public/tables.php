@@ -447,8 +447,6 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                     <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
-
-
                     <!---------------------- Modal ----------------->
                     <div id="myModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
@@ -895,7 +893,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 echo "<td>" . $row_renta["nombre"] . "</td>";
 
                                                 echo '<td onclick="" type="button" data-toggle="modal"
-                                                data-target="#myModal'.$row_renta["id_inmueble"].'">' . $row_renta["nombre_depa"] . '</td>';
+                                                data-target="#myModal"  data-id="'.$row_renta["id_inmueble"].'">' . $row_renta["nombre_depa"] . '</td>';
 
                                                 echo "<td> $" . $row_renta["precio_renta"] . "</td>";
 
