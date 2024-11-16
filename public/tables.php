@@ -434,8 +434,6 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                     <!--  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
-
-
                     <!---------------------- Modal ----------------->
                     <div id="myModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
@@ -444,80 +442,15 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                             <div class="modal-content">
                                 <div class="modal-header" align-items-center>
                                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                                    <h4 class="modal-title">Información del local</h4>
+                                    <h4 class="modal-title">Información de la propiedad</h4>
+                                    <!--
+                                    <input name="mySubmit" style="float: right;" class="btn btn-primary"
+                                                    type="submit" value="Agregar pago" /> -->
+
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPaymentModal"
+                                                    data-dismiss="modal">Agregar pago</button>
                                 </div>
                                 <!----------------- TABS --------------------->
-
-
-                                <!--
-      <br>
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-  </li>
-</ul>
-<div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-</div>
-
--->
-
-                                <!--
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">×</button>
-  <h3 ng-hide="newUser">Heading</h3>
-</div>
-
-
-<ul class="nav nav-tabs" id="tabContent">
-    <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-    <li><a href="#access-security" data-toggle="tab">Access / Security</a></li>
-    <li><a href="#networking" data-toggle="tab">Networking</a></li>
-</ul>
-
-<div class="tab-content">
-    <div class="tab-pane active" id="details">
-
-            Details tab
-       <div class="control-group">
-           <label class="control-label">Instance Name</label>
-       </div>
-    </div>
-
-    <div class="tab-pane" id="access-security">
-        content 0
-    </div>
-    <div class="tab-pane" id="networking">
-        content 1
-    </div>
-</div>
--->
-
-                                <!--
-<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-
-
-
-
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
--->
 
 
                                 <div class="row">
@@ -728,76 +661,10 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                     </div>
                                 </div>
 
-
-                                <!--
-<div class="tabbable">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item active">
-                            <a class="nav-link active" href="#AAA" data-toggle="tab">
-                                    Departamento
-                                </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#BBB" data-toggle="tab">
-                                    Inquilino
-                                </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#CCC" data-toggle="tab">
-                                    Facturación
-                                </a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#DDD" data-toggle="tab">
-                                    Historial
-                                </a>
-                        </li>
-                    </ul>
-
-     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="#AAA">Home</div>
-        <div role="tabpanel" class="tab-pane" id="#BBB">Profile</div>
-        <div role="tabpanel" class="tab-pane" id="#CCC">Message</div>
-        <div role="tabpanel" class="tab-pane" id="#DDD">Settings</div>
-     </div>
-</div>
--->
-
                                 <!---------------------- END TAB ------------------>
 
                                 <!----------------------------- MODAL BODY ------------------------------->
 
-                                <!--
-      <div class="modal-body">
-
-      <div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Departamento
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Departamento</a>
-    <a class="dropdown-item" href="#">Local</a>
-  </div>
-</div>
-<br><br>
-       <input type="text" placeholder="Nombre" class="form-control" value="ALEJANDRAS DEPA A , 2 Cuartos"/>
-       <br>
-       <input type="text" placeholder="Renta" class="form-control" value="8000"/>
-       <br>
-       <input type="text" placeholder="No. predial" class="form-control" value="1234567890"/> <br>
-       <input type="text" placeholder=".png .jpeg" class="form-control" value=""/>
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar imagen</button><br><br>
-       <input type="text" placeholder="contrato en formato pdf" class="form-control" value=""/>
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar PDF</button>
-       <br><br>
-
-       <div class="form-group">
-    <label for="exampleFormControlTextarea1">Comentarios</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
-  </div>
-
-      </div>
-       -->
                                 <!----------------------------- END MODAL BODY ------------------------>
 
 
@@ -871,40 +738,6 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                     class="form-control" value="" />
                                                 <br>
 
-                                                <!--
-                                            <div class="form-group">
-                                                <label for="exampleFormControlTextarea1">Servicios</label>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Agua
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckChecked">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Luz
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Internet
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckChecked">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        Gas
-                                                    </label>
-                                                </div>
-                                            </div> -->
-
                                                 <input name="mySubmit" style="float: right;" class="btn btn-primary"
                                                     type="submit" value="Agregar" />
                                             </form>
@@ -917,15 +750,68 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                 <!----------------------------- END MODAL BODY ------------------------>
 
+                            </div>
 
+                        </div>
+                    </div>
+                    <!------------------------------END MODAL ADD LOCAL----------------------------------------------------
+
+                     <!---------------------------- START MODAL ADD PAYMENT--------------------------------------------------->
+                     <div id="AddPaymentModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header" align-items-center>
+
+                                    <h4 class="modal-title">Agregar local</h4>
+                                </div>
+                                <!----------------- TABS --------------------->
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12 purplebg m">
+
+
+
+                                        <!-- Tab panes -->
+
+
+                                        <div class="modal-body">
+                                            <form action="addpayment.php" method="POST">
+                                                <br>
+
+                                                <label for="select_1">Tipo:</label>
+                                                <select class="form-control" id="type_local" name="type_payment">
+                                                    <option value="1">Efectivo</option>
+                                                    <option value="2">Transferencia</option>
+                                                    <option value="3">Depósito</option>
+                                                    <option value="4">Cheque</option>
+                                                </select>
+
+
+                                                <br>
+                                                <input type="text" name="nombre_local" placeholder="Cantidad ($)"
+                                                    class="form-control" value="" />
+                                                <br>
+                                                <input name="mySubmit" style="float: right;" class="btn btn-primary"
+                                                    type="submit" value="Agregar" />
+                                            </form>
+                                            <br><br>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!----------------------------- END MODAL PAYMENT BODY ------------------------>
 
                             </div>
 
                         </div>
                     </div>
-                    <!------------------------------END MODAL ADD LOCAL---------------------------------------------------->
-
-
+                    <!------------------------------END MODAL ADD PAYMENT----------------------------------------------------
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -993,7 +879,8 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                                 echo "<td>" . $row_renta["nombre"] . "</td>";
 
-                                                echo "<td>" . $row_renta["nombre_depa"] . "</td>";
+                                                echo '<td onclick="" type="button" data-toggle="modal"
+                                                data-target="#myModal"  data-id="'.$row_renta["id_inmueble"].'">' . $row_renta["nombre_depa"] . '</td>';
 
                                                 echo "<td> $" . $row_renta["precio_renta"] . "</td>";
 
@@ -1044,18 +931,9 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                     echo "<td>N/A</td>";
                                                 }
 
-
-
-
-
-
-
                                                 echo "</tr>";
                                             }
-                                        } else {
-                                            // echo "0 results";
                                         }
-
                                         ?>
 
                                     </tbody>
