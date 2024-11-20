@@ -13,6 +13,7 @@ $result = mysqli_query($con, $sql);
 
 //echo "ID LOTE:".$res_id_lote;
 
+
 $servername = "35.194.11.126";
 $username = "usrsondealo";
 $password = "srk142536";
@@ -33,10 +34,10 @@ $result_lote = mysqli_query($conn, $sql_lote);
 if (mysqli_num_rows($result_lote) > 0) {
     while ($row_lote = mysqli_fetch_assoc($result_lote)) {
         $id_lote = $row_lote["id"];
-        echo "ID Lote " . $id_lote;
+       // echo "ID Lote " . $id_lote;
     }
 } else {
-    echo "0 results";
+   // echo "0 results";
 }
 
 $sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_inmueble = " . $id_lote;
@@ -46,7 +47,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
     }
 } else {
-    echo "0 results";
+   // echo "0 results";
 }
 
 
@@ -69,7 +70,19 @@ if (mysqli_num_rows($result_inmueble) > 0) {
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        //echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!--
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 </head>
 
 <body id="page-top">
@@ -934,6 +947,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 echo "</tr>";
                                             }
                                         }
+                                    
                                         ?>
 
                                     </tbody>
