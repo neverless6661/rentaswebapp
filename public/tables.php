@@ -34,20 +34,19 @@ $result_lote = mysqli_query($conn, $sql_lote);
 if (mysqli_num_rows($result_lote) > 0) {
     while ($row_lote = mysqli_fetch_assoc($result_lote)) {
         $id_lote = $row_lote["id"];
-       // echo "ID Lote " . $id_lote;
+        // echo "ID Lote " . $id_lote;
     }
 } else {
-   // echo "0 results";
+    // echo "0 results";
 }
 
 $sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_inmueble = " . $id_lote;
 $result_inmueble = mysqli_query($conn, $sql_inmuebles);
 if (mysqli_num_rows($result_inmueble) > 0) {
     while ($row_inmueble = mysqli_fetch_assoc($result_inmueble)) {
-
     }
 } else {
-   // echo "0 results";
+    // echo "0 results";
 }
 
 
@@ -84,6 +83,35 @@ if (mysqli_num_rows($result_inmueble) > 0) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
 </head>
+<style>
+    a:link {
+        color: #858796;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: #858796;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #858796;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: #858796;
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    a.colorfied {
+        color: white;
+    }
+</style>
 
 <body id="page-top">
 
@@ -525,7 +553,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                     <!------------------------------END MODAL ADD LOCAL----------------------------------------------------
 
                      <!---------------------------- START MODAL ADD PAYMENT--------------------------------------------------->
-                     <div id="AddPaymentModal" class="modal fade" role="dialog">
+                    <div id="AddPaymentModal" class="modal fade" role="dialog">
                         <div class="modal-dialog">
 
                             <!-- Modal content-->
@@ -582,26 +610,26 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                     <!------------------------------END MODAL ADD PAYMENT---------------------------------------------------->
 
                     <div class="modal fade" id="takeaction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h4 class="modal-title" id="myModalLabel">Display Apply Id in modal box in a dynamic way? </h4>
-    </div>
-    <div class="form-inline container hidden-xs hidden-sm">
-    <input type="number" value="<?php echo $apply?>" class="form-group" placeholder="Job Code">
-    <br>
-    <?php
-    $apply2 = "Mensaje";
-    ?>
-    <input type="text" value="<?php echo $apply2?>" class="form-group" placeholder="Job Code">
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal"><span>Confirm</span></button>
-    </div>
-    </div>
-    </div>
-    </div>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Display Apply Id in modal box in a dynamic way? </h4>
+                                </div>
+                                <div class="form-inline container hidden-xs hidden-sm">
+                                    <input type="number" value="<?php echo $apply ?>" class="form-group" placeholder="Job Code">
+                                    <br>
+                                    <?php
+                                    $apply2 = "Mensaje";
+                                    ?>
+                                    <input type="text" value="<?php echo $apply2 ?>" class="form-group" placeholder="Job Code">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span>Confirm</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <!-- DataTales Example -->
@@ -610,7 +638,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                             <h6 class="m-0 font-weight-bold text-primary">Rentas</h6>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">+
                                 Agregar</button>
-                            <a href="#" data-toggle="modal" data-target="#takeaction" class="btn btn-default">CLICK AQUI</a>
+                           <!-- <a href="#" data-toggle="modal" data-target="#takeaction" class="btn btn-default"></a> -->
 
                         </div>
 
@@ -649,8 +677,11 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                         <tr>
                                             <td>Departamento</td>
-                                            <td class="colorfy" onclick="" type="button" data-toggle="modal"
-                                                data-target="#myModal" data-name="ALEJANDRAS DEPA CASA, 2 Cuartos">ALEJANDRAS DEPA CASA, 2 Cuartos</td>
+                                            <td class="colorfy">
+                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="ALEJANDRAS DEPA CASA, 2 Cuartos" class="colorfied">
+                                                    ALEJANDRAS DEPA CASA, 2 Cuartos
+                                                </a>
+                                            </td>
                                             <td>$8000</td>
                                             <td>N/A</td>
                                             <td>N/A</td>
@@ -674,8 +705,11 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                                 $name_depa = $row_renta["nombre_depa"];
 
-                                                echo '<td onclick="" type="button" data-toggle="modal"
-                                                data-target="#myModal" data-name="'.$name_depa.'">' . $name_depa . '</td>';
+                                                echo '<td>
+                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="' . $name_depa . '" class="btn btn-default">
+                                                ' . $name_depa . '
+                                                </a>
+                                                </td>';
 
 
 
@@ -788,251 +822,250 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
 
 
-                    <!---------------------- Modal ----------------->
-                    <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
+    <!---------------------- Modal ----------------->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header" align-items-center>
-                                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                                    <h4 class="modal-title">Información de la propiedad</h4>
-                                    <!--
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" align-items-center>
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Información de la propiedad</h4>
+                    <!--
                                     <input name="mySubmit" style="float: right;" class="btn btn-primary"
                                                     type="submit" value="Agregar pago" /> -->
 
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPaymentModal"
-                                                    data-dismiss="modal">Agregar pago</button>
-                                </div>
-                                <!----------------- TABS --------------------->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPaymentModal"
+                        data-dismiss="modal">Agregar pago</button>
+                </div>
+                <!----------------- TABS --------------------->
 
 
-                                <div class="row">
-                                    <div class="col-md-12 purplebg m">
-                                        <div class="tabbable">
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation" class="nav-item active"><a
-                                                        class="nav-link active" href="#home" aria-controls="home"
-                                                        role="tab" data-toggle="tab">Departamento</a>
-                                                </li>
-                                                <li role="presentation"><a class="nav-link" href="#profile"
-                                                        aria-controls="profile" role="tab"
-                                                        data-toggle="tab">Inquilino</a>
-                                                </li>
-                                                <li role="presentation"><a class="nav-link" href="#messages"
-                                                        aria-controls="messages" role="tab"
-                                                        data-toggle="tab">Facturación</a>
-                                                </li>
-                                                <li role="presentation"><a class="nav-link" href="#settings"
-                                                        aria-controls="settings" role="tab"
-                                                        data-toggle="tab">Historial</a>
-                                                </li>
-                                            </ul>
+                <div class="row">
+                    <div class="col-md-12 purplebg m">
+                        <div class="tabbable">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="nav-item active"><a
+                                        class="nav-link active" href="#home" aria-controls="home"
+                                        role="tab" data-toggle="tab">Departamento</a>
+                                </li>
+                                <li role="presentation"><a class="nav-link" href="#profile"
+                                        aria-controls="profile" role="tab"
+                                        data-toggle="tab">Inquilino</a>
+                                </li>
+                                <li role="presentation"><a class="nav-link" href="#messages"
+                                        aria-controls="messages" role="tab"
+                                        data-toggle="tab">Facturación</a>
+                                </li>
+                                <li role="presentation"><a class="nav-link" href="#settings"
+                                        aria-controls="settings" role="tab"
+                                        data-toggle="tab">Historial</a>
+                                </li>
+                            </ul>
 
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active" id="home">
-                                                    <div class="modal-body">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <div class="modal-body">
 
-                                                        <div class="btn-group">
-                                                            <button type="button"
-                                                                class="btn btn-primary dropdown-toggle"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                Departamento
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#">Departamento</a>
-                                                                <a class="dropdown-item" href="#">Local</a>
-                                                            </div>
-                                                        </div>
-                                                        <br><br>
-                                                        <input type="text" id = "name_depa" placeholder="Nombre" class="form-control"
-                                                             /></input>
-                                                        <br>
-                                                        <input type="text" placeholder="Renta" class="form-control"
-                                                            value="8000" />
-                                                        <br>
-                                                        <input type="text" placeholder="No. predial"
-                                                            class="form-control" value="1234567890" /> <br>
-                                                        <input type="text" placeholder=".png .jpeg" class="form-control"
-                                                            value="" />
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-dismiss="modal">Cargar imagen</button><br><br>
-                                                        <input type="text" placeholder="contrato en formato pdf"
-                                                            class="form-control" value="" />
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-dismiss="modal">Cargar PDF</button>
-                                                        <br><br>
-
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Servicios</label>
-
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="flexCheckDefault">
-                                                                <label class="form-check-label" for="flexCheckDefault">
-                                                                    Agua
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="flexCheckChecked" checked>
-                                                                <label class="form-check-label" for="flexCheckChecked">
-                                                                    Luz
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="flexCheckDefault" checked>
-                                                                <label class="form-check-label" for="flexCheckDefault">
-                                                                    Internet
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                    id="flexCheckChecked">
-                                                                <label class="form-check-label" for="flexCheckChecked">
-                                                                    Gas
-                                                                </label>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div role="tabpanel" class="tab-pane" id="profile">
-                                                    <div class="modal-body">
-
-
-                                                        <input type="text" placeholder="Nombre" class="form-control"
-                                                            value="Juan Perez" />
-                                                        <br>
-                                                        <input type="text" placeholder="Bienes raíces"
-                                                            class="form-control" value="Pepe Pecas" />
-                                                        <br>
-                                                        <div class="btn-group">
-                                                            <button type="button"
-                                                                class="btn btn-primary dropdown-toggle"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                Persona Física
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#">Persona Física</a>
-                                                                <a class="dropdown-item" href="#">Persona Moral</a>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <br>
-
-                                                        <div class="form-group form-check">
-                                                            <input type="checkbox" class="form-check-input"
-                                                                id="exampleCheck1">
-                                                            <label class="form-check-label"
-                                                                for="exampleCheck1">Facturación</label>
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Día de pago</label>
-                                                            <input type="text" placeholder="Día" class="form-control"
-                                                                value="15" />
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Último pago</label>
-                                                            <input type="text" placeholder="Último pago"
-                                                                class="form-control" value="16/10/2024" />
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Comentarios</label>
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="2"></textarea>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="messages">
-
-                                                    <div class="modal-body">
-
-
-                                                        <input type="text" placeholder="RFC" class="form-control"
-                                                            value="AAAA000000" />
-                                                        <br>
-                                                        <input type="text" placeholder="Nombre fiscal"
-                                                            class="form-control" value="Nombre Fiscal" />
-                                                        <br>
-                                                        <input type="text" placeholder="Correo electrónico"
-                                                            class="form-control" value="correo@mail.com" />
-                                                        <br>
-                                                        <label for="exampleFormControlTextarea1">Régimen
-                                                            Físcal</label><br>
-                                                        <div class="btn-group">
-
-                                                            <button type="button"
-                                                                class="btn btn-primary dropdown-toggle"
-                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                aria-expanded="false">
-                                                                01
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#">01</a>
-                                                                <a class="dropdown-item" href="#">02</a>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <br>
-
-
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Comentarios</label>
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="2"></textarea>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="settings">
-                                                    <div class="modal-body">
-
-
-
-                                                        <label for="exampleFormControlTextarea1">No hay
-                                                            registros</label><br>
-
-
-                                                    </div>
-                                                </div>
+                                        <div class="btn-group">
+                                            <button type="button"
+                                                class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Departamento
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Departamento</a>
+                                                <a class="dropdown-item" href="#">Local</a>
                                             </div>
                                         </div>
+                                        <br><br>
+                                        <input type="text" id="name_depa" placeholder="Nombre" class="form-control" /></input>
+                                        <br>
+                                        <input type="text" placeholder="Renta" class="form-control"
+                                            value="8000" />
+                                        <br>
+                                        <input type="text" placeholder="No. predial"
+                                            class="form-control" value="1234567890" /> <br>
+                                        <input type="text" placeholder=".png .jpeg" class="form-control"
+                                            value="" />
+                                        <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Cargar imagen</button><br><br>
+                                        <input type="text" placeholder="contrato en formato pdf"
+                                            class="form-control" value="" />
+                                        <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Cargar PDF</button>
+                                        <br><br>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Servicios</label>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Agua
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="flexCheckChecked" checked>
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    Luz
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="flexCheckDefault" checked>
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Internet
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                    id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    Gas
+                                                </label>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
-                                <!---------------------- END TAB ------------------>
-
-                                <!----------------------------- MODAL BODY ------------------------------->
-
-                                <!----------------------------- END MODAL BODY ------------------------>
 
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Guardar</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                    <div class="modal-body">
+
+
+                                        <input type="text" placeholder="Nombre" class="form-control"
+                                            value="Juan Perez" />
+                                        <br>
+                                        <input type="text" placeholder="Bienes raíces"
+                                            class="form-control" value="Pepe Pecas" />
+                                        <br>
+                                        <div class="btn-group">
+                                            <button type="button"
+                                                class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Persona Física
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Persona Física</a>
+                                                <a class="dropdown-item" href="#">Persona Moral</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                id="exampleCheck1">
+                                            <label class="form-check-label"
+                                                for="exampleCheck1">Facturación</label>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Día de pago</label>
+                                            <input type="text" placeholder="Día" class="form-control"
+                                                value="15" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Último pago</label>
+                                            <input type="text" placeholder="Último pago"
+                                                class="form-control" value="16/10/2024" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Comentarios</label>
+                                            <textarea class="form-control"
+                                                id="exampleFormControlTextarea1" rows="2"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="messages">
+
+                                    <div class="modal-body">
+
+
+                                        <input type="text" placeholder="RFC" class="form-control"
+                                            value="AAAA000000" />
+                                        <br>
+                                        <input type="text" placeholder="Nombre fiscal"
+                                            class="form-control" value="Nombre Fiscal" />
+                                        <br>
+                                        <input type="text" placeholder="Correo electrónico"
+                                            class="form-control" value="correo@mail.com" />
+                                        <br>
+                                        <label for="exampleFormControlTextarea1">Régimen
+                                            Físcal</label><br>
+                                        <div class="btn-group">
+
+                                            <button type="button"
+                                                class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                01
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">01</a>
+                                                <a class="dropdown-item" href="#">02</a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Comentarios</label>
+                                            <textarea class="form-control"
+                                                id="exampleFormControlTextarea1" rows="2"></textarea>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="settings">
+                                    <div class="modal-body">
+
+
+
+                                        <label for="exampleFormControlTextarea1">No hay
+                                            registros</label><br>
+
+
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                </div>
 
-                    <!--------------------------------------------- END Modal ----------------------------------------->
+                <!---------------------- END TAB ------------------>
+
+                <!----------------------------- MODAL BODY ------------------------------->
+
+                <!----------------------------- END MODAL BODY ------------------------>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--------------------------------------------- END Modal ----------------------------------------->
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -1063,36 +1096,36 @@ if (mysqli_num_rows($result_inmueble) > 0) {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  -->
 
     <script type="text/javascript">
-$('#takeaction').on('show.bs.modal', function(e) {
-var apply = $(e.relatedTarget).data('apply');
-$(e.currentTarget).find('input[name="apply"]').val(apply);
-var apply2 = $(e.relatedTarget).data('apply');
-$(e.currentTarget).find('input[name="apply2"]').val(apply2);
-});
-</script>
+        $('#takeaction').on('show.bs.modal', function(e) {
+            var apply = $(e.relatedTarget).data('apply');
+            $(e.currentTarget).find('input[name="apply"]').val(apply);
+            var apply2 = $(e.relatedTarget).data('apply');
+            $(e.currentTarget).find('input[name="apply2"]').val(apply2);
+        });
+    </script>
 
-<script type="text/javascript">
-    /*
+    <script type="text/javascript">
+        /*
 $('#myModal').on('show.bs.modal', function(e) {
 var name_depa = $(e.relatedTarget).data('name_depa');
 $(e.currentTarget).find('input[name="name_depa"]').val(name_depa);
 });
 */
-</script>
+    </script>
 
 
-<script type="text/javascript">
-$(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-var table = $('#dataTable').DataTable();
+            var table = $('#dataTable').DataTable();
 
-$('#myModal').on('show.bs.modal', function(e) {
-  var name_depa = $(e.relatedTarget).attr('data-name');
-  $(e.currentTarget).find('input[id="name_depa"]').val(name_depa);
-});
+            $('#myModal').on('show.bs.modal', function(e) {
+                var name_depa = $(e.relatedTarget).attr('data-name');
+                $(e.currentTarget).find('input[id="name_depa"]').val(name_depa);
+            });
 
-} );
-</script>
+        });
+    </script>
 
 
 </body>
