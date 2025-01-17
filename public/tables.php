@@ -820,6 +820,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
         </div>
     </div>
 
+    <!-----Comentarios test---->
 
 
     <!---------------------- Modal ----------------->
