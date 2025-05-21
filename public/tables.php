@@ -613,19 +613,24 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Display Apply Id in modal box in a dynamic way? </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Display Apply Id in modal box in a dynamic
+                                        way? </h4>
                                 </div>
                                 <div class="form-inline container hidden-xs hidden-sm">
-                                    <input type="number" value="<?php echo $apply ?>" class="form-group" placeholder="Job Code">
+                                    <input type="number" value="<?php echo $apply ?>" class="form-group"
+                                        placeholder="Job Code">
                                     <br>
                                     <?php
                                     $apply2 = "Mensaje";
                                     ?>
-                                    <input type="text" value="<?php echo $apply2 ?>" class="form-group" placeholder="Job Code">
+                                    <input type="text" value="<?php echo $apply2 ?>" class="form-group"
+                                        placeholder="Job Code">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span>Confirm</span></button>
+                                    <button type="button" class="btn btn-default"
+                                        data-dismiss="modal"><span>Confirm</span></button>
                                 </div>
                             </div>
                         </div>
@@ -638,7 +643,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                             <h6 class="m-0 font-weight-bold text-primary">Rentas</h6>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddModal">+
                                 Agregar</button>
-                           <!-- <a href="#" data-toggle="modal" data-target="#takeaction" class="btn btn-default"></a> -->
+                            <!-- <a href="#" data-toggle="modal" data-target="#takeaction" class="btn btn-default"></a> -->
 
                         </div>
 
@@ -678,7 +683,9 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                         <tr>
                                             <td>Departamento</td>
                                             <td class="colorfy">
-                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="ALEJANDRAS DEPA CASA, 2 Cuartos" class="colorfied">
+                                                <a href="#" data-toggle="modal" data-target="#myModal"
+                                                    data-name="ALEJANDRAS DEPA CASA, 2 Cuartos" data-price="8000"
+                                                    class="colorfied">
                                                     ALEJANDRAS DEPA CASA, 2 Cuartos
                                                 </a>
                                             </td>
@@ -701,21 +708,45 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 echo "<tr>";
 
 
-                                                echo "<td>" . $row_renta["nombre"] . "</td>";
-
+                                                $tipo_depa = $row_renta["nombre"];
                                                 $name_depa = $row_renta["nombre_depa"];
+                                                $price_depa = $row_renta["precio_renta"];
+                                                $diapago_depa = $row_renta["dia_pago"];
+                                                $fecha_pago = "";
+                                                $factura_option = "";
+                                                $incremento = "";
+                                                $deuda = "";
 
-                                                echo '<td>
-                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="' . $name_depa . '" class="btn btn-default">
-                                                ' . $name_depa . '
-                                                </a>
-                                                </td>';
+                                                $predial = "";
+
+                                                $names_inq = "";
+                                                $apellidos_inq = "";
+
+                                                $ultimo_pago = "";
+
+                                                $address = "";
+
+                                                $id_inquilino = "";
+
+                                                $fact_rfc = "";
+                                                $fact_razon = "";
+                                                $fact_correo = "";
+                                                $fact_regimen = "";
+                                                $fact_cfdi = "";
+                                                $fact_pago = "";
+
+
+                                                $fact_direccion = "";
 
 
 
-                                                echo "<td> $" . $row_renta["precio_renta"] . "</td>";
 
-                                                echo "<td>" . $row_renta["dia_pago"] . "</td>";
+
+
+
+
+
+
 
                                                 $id_inmueble = $row_renta["id_inmueble"];
 
@@ -724,43 +755,91 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 $result_pago = mysqli_query($conn, $sql_pago);
                                                 if (mysqli_num_rows($result_pago) > 0) {
                                                     while ($row_pago = mysqli_fetch_assoc($result_pago)) {
-                                                        echo "<td>" . $row_pago["fecha_pago"] . "</td>";
+                                                        // echo "<td>" . $row_pago["fecha_pago"] . "</td>";
+                                                        $fecha_pago = $row_pago["fecha_pago"];
+                                                        $ultimo_pago = $row_pago["fecha_ult_pago"];
                                                         if ($row_pago["id_inquilino"] != NULL || $row_pago["id_inquilino"] != "") {
                                                             $sql_inquilino = "SELECT * FROM inquilino WHERE id = " . $row_pago["id_inquilino"];
                                                             $result_inquilino = mysqli_query($conn, $sql_inquilino);
                                                             if (mysqli_num_rows($result_inquilino) > 0) {
                                                                 while ($row_inquilino = mysqli_fetch_assoc($result_inquilino)) {
-                                                                    if ($row_inquilino["factura_option"] != NULL || $row_inquilino["factura_option"] != "") {
-                                                                        echo "<td>Si</td>";
+                                                                    $names_inq = $row_inquilino["nombres"];
+                                                                    $apellidos_inq = $row_inquilino["apellidos"];
+                                                                    if ($row_inquilino["factura_option"] == 1) {
+                                                                        $factura_option = "Si";
+
+                                                                        $id_inquilino = $row_inquilino["id"];
+
+                                                                        $sql_facturacion = "SELECT * FROM facturacion WHERE id_inquilino =" . $id_inquilino;
+                                                                        $result_facturacion = mysqli_query($conn, $sql_facturacion);
+                                                                        if (mysqli_num_rows($result_facturacion) > 0) {
+                                                                            while ($row_facturacion = mysqli_fetch_assoc($result_facturacion)) {
+
+
+
+                                                                            }
+                                                                        }
+
+
+                                                                        // echo "<td>Si</td>";
                                                                     } else {
-                                                                        echo "<td>No</td>";
+                                                                        $factura_option = "No";
+                                                                        // echo "<td>No</td>";
                                                                     }
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 } else {
-                                                    echo "<td>N/A</td>";
-                                                    echo "<td>N/A</td>";
+                                                    $factura_option = "N/A";
+                                                    $fecha_pago = "N/A";
+                                                    //echo "<td>N/A</td>";
+                                                    //echo "<td>N/A</td>";
                                                 }
 
 
                                                 $sql_regrenta = "SELECT * FROM registro_renta WHERE id_inmueble = " . $id_inmueble;
                                                 $result_regrenta = mysqli_query($conn, $sql_regrenta);
+                                                $deuda = "";
                                                 if (mysqli_num_rows($result_regrenta) > 0) {
                                                     while ($row_regrenta = mysqli_fetch_assoc($result_regrenta)) {
-                                                        echo "<td>" . $row_regrenta["incremento_pago"] . "</td>";
-
+                                                        // echo "<td>" . $row_regrenta["incremento_pago"] . "</td>";
+                                                        $incremento = $row_regrenta["incremento_pago"];
                                                         $renta = $row_regrenta["precio_renta"];
                                                         $pago = $row_regrenta["cantidad_pago"];
                                                         $deuda = $renta - $pago;
+                                                        $predial = $row_regrenta["num_predial"];
 
-                                                        echo "<td> $" . $deuda . "</td>";
+
+
+                                                        //echo "<td> $" . $deuda . "</td>";
                                                     }
                                                 } else {
-                                                    echo "<td>N/A</td>";
-                                                    echo "<td>N/A</td>";
+                                                    $deuda = "N/A";
+                                                    $incremento = "N/A";
+                                                    // echo "<td>AN/</td>";
+                                                    // echo "<td>N/A</td>";
                                                 }
+
+                                                echo "<td>" . $tipo_depa . "</td>";
+
+                                                echo '<td>
+                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="' . $name_depa . '" data-price="' . $price_depa . '" data-diapago = "' . $diapago_depa . '" data-predial="' . $predial . '"    data-nameinq="' . $names_inq . '" data-apellinq="' . $apellidos_inq . '" data-diapago="' . $dia_pago . '" data-ultimopago="' . $ultimo_pago . '" class="btn btn-default">
+                                                ' . $name_depa . '
+                                                </a>
+                                                </td>';
+
+                                                echo "<td> $" . $price_depa . "</td>";
+
+                                                echo "<td>" . $diapago_depa . "</td>";
+
+                                                echo "<td>" . $fecha_pago . "</td>";
+                                                echo "<td>" . $factura_option . "</td>";
+
+                                                echo "<td>" . $incremento . "</td>";
+                                                echo "<td>" . $deuda . "</td>";
+
+
 
                                                 echo "</tr>";
                                             }
@@ -846,21 +925,17 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                         <div class="tabbable">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="nav-item active"><a
-                                        class="nav-link active" href="#home" aria-controls="home"
-                                        role="tab" data-toggle="tab">Departamento</a>
+                                <li role="presentation" class="nav-item active"><a class="nav-link active" href="#home"
+                                        aria-controls="home" role="tab" data-toggle="tab">Departamento</a>
                                 </li>
-                                <li role="presentation"><a class="nav-link" href="#profile"
-                                        aria-controls="profile" role="tab"
-                                        data-toggle="tab">Inquilino</a>
+                                <li role="presentation"><a class="nav-link" href="#profile" aria-controls="profile"
+                                        role="tab" data-toggle="tab">Inquilino</a>
                                 </li>
-                                <li role="presentation"><a class="nav-link" href="#messages"
-                                        aria-controls="messages" role="tab"
-                                        data-toggle="tab">Facturación</a>
+                                <li role="presentation"><a class="nav-link" href="#messages" aria-controls="messages"
+                                        role="tab" data-toggle="tab">Facturación</a>
                                 </li>
-                                <li role="presentation"><a class="nav-link" href="#settings"
-                                        aria-controls="settings" role="tab"
-                                        data-toggle="tab">Historial</a>
+                                <li role="presentation"><a class="nav-link" href="#settings" aria-controls="settings"
+                                        role="tab" data-toggle="tab">Historial</a>
                                 </li>
                             </ul>
 
@@ -870,10 +945,8 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                     <div class="modal-body">
 
                                         <div class="btn-group">
-                                            <button type="button"
-                                                class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Departamento
                                             </button>
                                             <div class="dropdown-menu">
@@ -882,21 +955,20 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                             </div>
                                         </div>
                                         <br><br>
-                                        <input type="text" id="name_depa" placeholder="Nombre" class="form-control" /></input>
+                                        <input type="text" id="name_depa" placeholder="Nombre"
+                                            class="form-control" /></input>
                                         <br>
-                                        <input type="text" placeholder="Renta" class="form-control"
-                                            value="8000" />
+                                        <input type="text" id="price_depa" placeholder="Renta" class="form-control" />
                                         <br>
-                                        <input type="text" placeholder="No. predial"
-                                            class="form-control" value="1234567890" /> <br>
-                                        <input type="text" placeholder=".png .jpeg" class="form-control"
+                                        <input type="text" id="predial_depa" placeholder="No. predial"
+                                            class="form-control" /> <br>
+                                        <input type="text" placeholder=".png .jpeg" class="form-control" value="" />
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
+                                            imagen</button><br><br>
+                                        <input type="text" placeholder="contrato en formato pdf" class="form-control"
                                             value="" />
-                                        <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">Cargar imagen</button><br><br>
-                                        <input type="text" placeholder="contrato en formato pdf"
-                                            class="form-control" value="" />
-                                        <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">Cargar PDF</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
+                                            PDF</button>
                                         <br><br>
 
                                         <div class="form-group">
@@ -941,17 +1013,14 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                     <div class="modal-body">
 
 
-                                        <input type="text" placeholder="Nombre" class="form-control"
-                                            value="Juan Perez" />
+                                        <input type="text" id="name_inq" placeholder="Nombre" class="form-control" />
                                         <br>
-                                        <input type="text" placeholder="Bienes raíces"
-                                            class="form-control" value="Pepe Pecas" />
+                                        <input type="text" id="apellidos_inq" placeholder="Apellidos"
+                                            class="form-control" />
                                         <br>
                                         <div class="btn-group">
-                                            <button type="button"
-                                                class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Persona Física
                                             </button>
                                             <div class="dropdown-menu">
@@ -963,29 +1032,26 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                         <br>
 
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input"
-                                                id="exampleCheck1">
-                                            <label class="form-check-label"
-                                                for="exampleCheck1">Facturación</label>
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Facturación</label>
                                         </div>
 
 
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Día de pago</label>
-                                            <input type="text" placeholder="Día" class="form-control"
-                                                value="15" />
+                                            <input type="text" id="dia_pago" placeholder="Día" class="form-control" />
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Último pago</label>
-                                            <input type="text" placeholder="Último pago"
-                                                class="form-control" value="16/10/2024" />
+                                            <input type="text" id="ultimo_pago" placeholder="Fecha"
+                                                class="form-control" />
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Comentarios</label>
-                                            <textarea class="form-control"
-                                                id="exampleFormControlTextarea1" rows="2"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                rows="2"></textarea>
                                         </div>
 
                                     </div>
@@ -995,38 +1061,66 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                     <div class="modal-body">
 
 
-                                        <input type="text" placeholder="RFC" class="form-control"
-                                            value="AAAA000000" />
+                                        <input type="text" id="rfc" placeholder="RFC" class="form-control" />
                                         <br>
-                                        <input type="text" placeholder="Nombre fiscal"
-                                            class="form-control" value="Nombre Fiscal" />
+                                        <input type="text" id="razon_social" placeholder="Razón Social"
+                                            class="form-control" />
                                         <br>
-                                        <input type="text" placeholder="Correo electrónico"
-                                            class="form-control" value="correo@mail.com" />
+                                        <input type="text" id="fact_correo" placeholder="Correo electrónico"
+                                            class="form-control" />
                                         <br>
                                         <label for="exampleFormControlTextarea1">Régimen
                                             Físcal</label><br>
                                         <div class="btn-group">
 
-                                            <button type="button"
-                                                class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                01
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                601
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">01</a>
-                                                <a class="dropdown-item" href="#">02</a>
+                                                <a class="dropdown-item" href="#">601</a>
+                                                <a class="dropdown-item" href="#">603</a>
                                             </div>
                                         </div>
-                                        <br>
-                                        <br>
+
+                                        <br><br>
+
+                                        <label for="exampleFormControlTextarea1">CFDI</label><br>
+                                        <div class="btn-group">
+
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                G01
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">G01</a>
+                                                <a class="dropdown-item" href="#">G02</a>
+                                            </div>
+                                        </div>
 
 
+                                        <br><br>
+
+                                        <label for="exampleFormControlTextarea1">Tipo de pago</label><br>
+                                        <div class="btn-group">
+
+                                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Efectivo
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Efectivo</a>
+                                                <a class="dropdown-item" href="#">Transferencia</a>
+                                                <a class="dropdown-item" href="#">Depósito</a>
+                                                <a class="dropdown-item" href="#">Cheque</a>
+                                            </div>
+                                        </div>
+
+                                        <br><br>
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Comentarios</label>
-                                            <textarea class="form-control"
-                                                id="exampleFormControlTextarea1" rows="2"></textarea>
+                                            <label for="exampleFormControlTextarea1">Dirección</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                rows="2"></textarea>
                                         </div>
 
                                     </div>
@@ -1035,6 +1129,23 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                 <div role="tabpanel" class="tab-pane" id="settings">
                                     <div class="modal-body">
 
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>Día</th>
+                                                    <th>Cantidad</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
 
 
                                         <label for="exampleFormControlTextarea1">No hay
@@ -1056,8 +1167,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
                 </div>
             </div>
@@ -1096,7 +1206,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  -->
 
     <script type="text/javascript">
-        $('#takeaction').on('show.bs.modal', function(e) {
+        $('#takeaction').on('show.bs.modal', function (e) {
             var apply = $(e.relatedTarget).data('apply');
             $(e.currentTarget).find('input[name="apply"]').val(apply);
             var apply2 = $(e.relatedTarget).data('apply');
@@ -1115,13 +1225,29 @@ $(e.currentTarget).find('input[name="name_depa"]').val(name_depa);
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             var table = $('#dataTable').DataTable();
 
-            $('#myModal').on('show.bs.modal', function(e) {
+            $('#myModal').on('show.bs.modal', function (e) {
                 var name_depa = $(e.relatedTarget).attr('data-name');
                 $(e.currentTarget).find('input[id="name_depa"]').val(name_depa);
+                var price_depa = $(e.relatedTarget).attr('data-price');
+                $(e.currentTarget).find('input[id="price_depa"]').val(price_depa);
+                var predial_depa = $(e.relatedTarget).attr('data-predial');
+                $(e.currentTarget).find('input[id="predial_depa"]').val(predial_depa);
+
+                var name_inq = $(e.relatedTarget).attr('data-nameinq');
+                $(e.currentTarget).find('input[id="name_inq"]').val(name_inq);
+
+                var apellidos_inq = $(e.relatedTarget).attr('data-apellinq');
+                $(e.currentTarget).find('input[id="apellidos_inq"]').val(apellidos_inq);
+
+                var dia_pago = $(e.relatedTarget).attr('data-diapago');
+                $(e.currentTarget).find('input[id="dia_pago"]').val(dia_pago);
+
+                var ultimo_pago = $(e.relatedTarget).attr('data-ultimopago');
+                $(e.currentTarget).find('input[id="ultimo_pago"]').val(ultimo_pago);
             });
 
         });
