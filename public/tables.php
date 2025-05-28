@@ -1,28 +1,10 @@
 <?php
-/*
-$con = mysqli_connect("35.194.11.126", "usrsondealo", "srk142536", "rentas");
-
-if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-
-$sql = "SELECT asignacion_lotes WHERE id_usuario = 1";
-$result = mysqli_query($con, $sql);
-*/
-// $res_id_lote = $con->query($sql_lote);
-
-//echo "ID LOTE:".$res_id_lote;
-
-
-$servername = "35.194.11.126";
-$username = "usrsondealo";
-$password = "srk142536";
-$dbname = "rentas";
+require_once('connections/conexion.php');
 
 $id_lote = 0;
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($hostname,$username,$password,$database);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -700,7 +682,8 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
                                         <?php
 
-                                        $sql_renta = "SELECT * FROM asignacion_inmueble JOIN inmueble ON asignacion_inmueble.id_inmueble = inmueble.id JOIN tipo_inmueble ON inmueble.tipo = tipo_inmueble.id WHERE id_lote=" . $id_lote;
+                                        $sql_renta = "SELECT asignacion_inmueble.id_lote AS id_lote, asignacion_inmueble.id_inmueble as id_inmueble, inmueble.nombre as name_inmueble,
+inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen as id_imagen, inmueble.precio_renta as precio_renta, tipo_inmueble.nombre as tipo_inmueble FROM asignacion_inmueble JOIN inmueble ON asignacion_inmueble.id_inmueble = inmueble.id JOIN tipo_inmueble ON inmueble.id_tipo = tipo_inmueble.id WHERE id_lote=" . $id_lote;
                                         $result_renta = mysqli_query($conn, $sql_renta);
 
                                         if (mysqli_num_rows($result_renta) > 0) {
@@ -708,8 +691,8 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 echo "<tr>";
 
 
-                                                $tipo_depa = $row_renta["nombre"];
-                                                $name_depa = $row_renta["nombre_depa"];
+                                                $tipo_depa = $row_renta["tipo_inmueble"];
+                                                $name_depa = $row_renta["name_inmueble"];
                                                 $price_depa = $row_renta["precio_renta"];
                                                 $diapago_depa = $row_renta["dia_pago"];
                                                 $fecha_pago = "";
@@ -737,16 +720,6 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 
 
                                                 $fact_direccion = "";
-
-
-
-
-
-
-
-
-
-
 
                                                 $id_inmueble = $row_renta["id_inmueble"];
 
@@ -807,7 +780,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                         $incremento = $row_regrenta["incremento_pago"];
                                                         $renta = $row_regrenta["precio_renta"];
                                                         $pago = $row_regrenta["cantidad_pago"];
-                                                        $deuda = $renta - $pago;
+                                                        $deuda = $row_regrenta["deuda_pago"];
                                                         $predial = $row_regrenta["num_predial"];
 
 
