@@ -4,7 +4,7 @@ require_once('connections/conexion.php');
 $id_lote = 0;
 
 // Create connection
-$conn = mysqli_connect($hostname,$username,$password,$database);
+$conn = mysqli_connect($hostname, $username, $password, $database);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -16,10 +16,9 @@ $result_lote = mysqli_query($conn, $sql_lote);
 if (mysqli_num_rows($result_lote) > 0) {
     while ($row_lote = mysqli_fetch_assoc($result_lote)) {
         $id_lote = $row_lote["id"];
-        // echo "ID Lote " . $id_lote;
     }
 } else {
-    // echo "0 results";
+    echo "0 results";
 }
 
 $sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_inmueble = " . $id_lote;
@@ -27,10 +26,7 @@ $result_inmueble = mysqli_query($conn, $sql_inmuebles);
 if (mysqli_num_rows($result_inmueble) > 0) {
     while ($row_inmueble = mysqli_fetch_assoc($result_inmueble)) {
     }
-} else {
-    // echo "0 results";
 }
-
 
 
 ?>
@@ -64,6 +60,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+
 </head>
 <style>
     a:link {
@@ -309,7 +306,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Agosto 8, 2024</div>
+                                        <div class="small text-gray-500">Agosto 8, 2025</div>
                                         <span class="font-weight-bold">Hay una factura que generar</span>
                                     </div>
                                 </a>
@@ -320,7 +317,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Agosto 7, 2024</div>
+                                        <div class="small text-gray-500">Agosto 7, 2025</div>
                                         Una renta esta por vencer!
                                     </div>
                                 </a>
@@ -331,7 +328,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Agosto 2, 2024</div>
+                                        <div class="small text-gray-500">Agosto 2, 2025</div>
                                         Información faltante en renta.
                                     </div>
                                 </a>
@@ -542,7 +539,7 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                             <div class="modal-content">
                                 <div class="modal-header" align-items-center>
 
-                                    <h4 class="modal-title">Agregar local</h4>
+                                    <h4 class="modal-title">Agregar pago</h4>
                                 </div>
                                 <!----------------- TABS --------------------->
 
@@ -561,20 +558,30 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 <br>
 
                                                 <label for="select_1">Tipo:</label>
-                                                <select class="form-control" id="type_local" name="type_payment">
+                                                <select class="form-control" id="type_payment" name="type_payment">
                                                     <option value="1">Efectivo</option>
                                                     <option value="2">Transferencia</option>
                                                     <option value="3">Depósito</option>
                                                     <option value="4">Cheque</option>
                                                 </select>
+                                                <br>
+                                                <input type="hidden" id="id_inquilino" name="id_inquilino" class="form-control" />
+                                                <input type="hidden" id="id_inmueble" name="id_inmueble" class="form-control" />
+                                                <br>
+                                                <input type="text" id="cantidad_pago" name="cantidad_pago"
+                                                    placeholder="Cantidad ($)" class="form-control" value="" />
+                                                <br>
 
+                                                <input type="date" id="fechapago" name="fechapago" min="2025-01-15"
+                                                    max="2030-01-01" class="form-control">
 
                                                 <br>
-                                                <input type="text" name="nombre_local" placeholder="Cantidad ($)"
-                                                    class="form-control" value="" />
-                                                <br>
+
                                                 <input name="mySubmit" style="float: right;" class="btn btn-primary"
                                                     type="submit" value="Agregar" />
+
+
+
                                             </form>
                                             <br><br>
 
@@ -732,7 +739,8 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                         $fecha_pago = $row_pago["fecha_pago"];
                                                         $ultimo_pago = $row_pago["fecha_ult_pago"];
                                                         if ($row_pago["id_inquilino"] != NULL || $row_pago["id_inquilino"] != "") {
-                                                            $sql_inquilino = "SELECT * FROM inquilino WHERE id = " . $row_pago["id_inquilino"];
+                                                            $id_inquilino = $row_pago["id_inquilino"];
+                                                            $sql_inquilino = "SELECT * FROM inquilino WHERE id = " . $id_inquilino;
                                                             $result_inquilino = mysqli_query($conn, $sql_inquilino);
                                                             if (mysqli_num_rows($result_inquilino) > 0) {
                                                                 while ($row_inquilino = mysqli_fetch_assoc($result_inquilino)) {
@@ -797,10 +805,12 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                 echo "<td>" . $tipo_depa . "</td>";
 
                                                 echo '<td>
-                                                <a href="#" data-toggle="modal" data-target="#myModal" data-name="' . $name_depa . '" data-price="' . $price_depa . '" data-diapago = "' . $diapago_depa . '" data-predial="' . $predial . '"    data-nameinq="' . $names_inq . '" data-apellinq="' . $apellidos_inq . '" data-diapago="' . $dia_pago . '" data-ultimopago="' . $ultimo_pago . '" class="btn btn-default">
+                                                <a href="#" id="link_to_modal" data-toggle="modal" data-target="#myModal" data-name="' . $name_depa . '" data-price="' . $price_depa . '" data-diapago = "' . $diapago_depa . '" data-predial="' . $predial . '"    data-nameinq="' . $names_inq . '" data-apellinq="' . $apellidos_inq . '" data-diapago="' . $dia_pago . '" data-ultimopago="' . $ultimo_pago . '"  data-idinquilino="' . $id_inquilino . '" data-idinmueble="' . $id_inmueble . '" class="btn btn-default">
                                                 ' . $name_depa . '
                                                 </a>
                                                 </td>';
+                                                echo '<input type="hidden" id="id_inquilino0" class="form-control" value="'.$id_inquilino.'" />';
+                                                echo '<input type="hidden" id="id_inmueble0" class="form-control" value="'.$id_inmueble.'" />';
 
                                                 echo "<td> $" . $price_depa . "</td>";
 
@@ -835,7 +845,7 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Powered by Cbapps &copy; 2024</span>
+                        <span>Powered by Cbapps &copy; 2025</span>
                     </div>
                 </div>
             </footer>
@@ -887,9 +897,16 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                     <!--
                                     <input name="mySubmit" style="float: right;" class="btn btn-primary"
                                                     type="submit" value="Agregar pago" /> -->
+                    <input type="hidden" id="id_inquilino1" class="form-control" />
+                    <input type="hidden" id="id_inmueble1" class="form-control" />
+
+
+
+
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPaymentModal"
-                        data-dismiss="modal">Agregar pago</button>
+                        data-dismiss="modal" data-idinquilino="<?php echo $id_inquilino; ?>" data-idinmueble="<?php echo $id_inmueble; ?>">Agregar
+                        pago</button>
                 </div>
                 <!----------------- TABS --------------------->
 
@@ -1201,13 +1218,15 @@ $(e.currentTarget).find('input[name="name_depa"]').val(name_depa);
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var table = $('#dataTable').DataTable();
+            // var table = $('#dataTable').DataTable();
 
             $('#myModal').on('show.bs.modal', function (e) {
                 var name_depa = $(e.relatedTarget).attr('data-name');
                 $(e.currentTarget).find('input[id="name_depa"]').val(name_depa);
+
                 var price_depa = $(e.relatedTarget).attr('data-price');
                 $(e.currentTarget).find('input[id="price_depa"]').val(price_depa);
+
                 var predial_depa = $(e.relatedTarget).attr('data-predial');
                 $(e.currentTarget).find('input[id="predial_depa"]').val(predial_depa);
 
@@ -1222,11 +1241,39 @@ $(e.currentTarget).find('input[name="name_depa"]').val(name_depa);
 
                 var ultimo_pago = $(e.relatedTarget).attr('data-ultimopago');
                 $(e.currentTarget).find('input[id="ultimo_pago"]').val(ultimo_pago);
+
+                var id_inquilino = $(e.relatedTarget).attr('data-idinquilino');
+                $(e.currentTarget).find('input[id="id_inquilino"]').val(id_inquilino);
+
+                var id_inmueble = $(e.relatedTarget).attr('data-idinmueble');
+                $(e.currentTarget).find('input[id="id_inmueble"]').val(id_inmueble);
             });
+
+            $('#AddPaymentModal').on('show.bs.modal', function (e) {
+
+                var id_inquilino = $(e.relatedTarget).attr('data-idinquilino');
+                $(e.currentTarget).find('input[id="id_inquilino"]').val(id_inquilino);
+
+                var id_inmueble = $(e.relatedTarget).attr('data-idinmueble');
+                $(e.currentTarget).find('input[id="id_inmueble"]').val(id_inmueble);
+            });
+
+
 
         });
     </script>
 
+    <script type="text/javascript">
+                        var submitButton = $("#link_to_modal");
+                        submitButton.click(function () {
+                         var idinquilino = $("#id_inquilino0").val();
+                         var idinmueble = $("#id_inmueble0").val();
+                          console.log("*****VALUE******");
+                          console.log(idinquilino);
+                          console.log(idinmueble);
+                        });
+
+    </script>
 
 </body>
 
