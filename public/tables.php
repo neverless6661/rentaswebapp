@@ -567,7 +567,6 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                 <br>
                                                 <input type="hidden" id="id_inquilino" name="id_inquilino" class="form-control" />
                                                 <input type="hidden" id="id_inmueble" name="id_inmueble" class="form-control" />
-                                                <br>
                                                 <input type="text" id="cantidad_pago" name="cantidad_pago"
                                                     placeholder="Cantidad ($)" class="form-control" value="" />
                                                 <br>
