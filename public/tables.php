@@ -21,7 +21,7 @@ if (mysqli_num_rows($result_lote) > 0) {
     echo "0 results";
 }
 
-$sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_inmueble = " . $id_lote;
+$sql_inmuebles = "SELECT * FROM asignacion_inmueble WHERE id_lote = " . $id_lote;
 $result_inmueble = mysqli_query($conn, $sql_inmuebles);
 if (mysqli_num_rows($result_inmueble) > 0) {
     while ($row_inmueble = mysqli_fetch_assoc($result_inmueble)) {
@@ -565,8 +565,10 @@ if (mysqli_num_rows($result_inmueble) > 0) {
                                                     <option value="4">Cheque</option>
                                                 </select>
                                                 <br>
-                                                <input type="hidden" id="id_inquilino" name="id_inquilino" class="form-control" />
-                                                <input type="hidden" id="id_inmueble" name="id_inmueble" class="form-control" />
+                                                <input type="hidden" id="id_inquilino" name="id_inquilino"
+                                                    class="form-control" />
+                                                <input type="hidden" id="id_inmueble" name="id_inmueble"
+                                                    class="form-control" />
                                                 <input type="text" id="cantidad_pago" name="cantidad_pago"
                                                     placeholder="Cantidad ($)" class="form-control" value="" />
                                                 <br>
@@ -692,6 +694,8 @@ if (mysqli_num_rows($result_inmueble) > 0) {
 inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen as id_imagen, inmueble.precio_renta as precio_renta, tipo_inmueble.nombre as tipo_inmueble FROM asignacion_inmueble JOIN inmueble ON asignacion_inmueble.id_inmueble = inmueble.id JOIN tipo_inmueble ON inmueble.id_tipo = tipo_inmueble.id WHERE id_lote=" . $id_lote;
                                         $result_renta = mysqli_query($conn, $sql_renta);
 
+                                        // $id_inquilino = "";
+
                                         if (mysqli_num_rows($result_renta) > 0) {
                                             while ($row_renta = mysqli_fetch_assoc($result_renta)) {
                                                 echo "<tr>";
@@ -715,7 +719,7 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
 
                                                 $address = "";
 
-                                                $id_inquilino = "";
+
 
                                                 $fact_rfc = "";
                                                 $fact_razon = "";
@@ -729,8 +733,12 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
 
                                                 $id_inmueble = $row_renta["id_inmueble"];
 
+                                                // echo "ID INMUEBLE: ".$id_inmueble."<br>";
 
-                                                $sql_pago = "SELECT * FROM registro_pagos WHERE id_inmueble =" . $id_inmueble;
+
+                                                $sql_pago = "SELECT * FROM registro_renta WHERE id_inmueble =" . $id_inmueble;
+
+                                                //echo "QUERY: ".$sql_pago."<br>";
                                                 $result_pago = mysqli_query($conn, $sql_pago);
                                                 if (mysqli_num_rows($result_pago) > 0) {
                                                     while ($row_pago = mysqli_fetch_assoc($result_pago)) {
@@ -739,6 +747,9 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                         $ultimo_pago = $row_pago["fecha_ult_pago"];
                                                         if ($row_pago["id_inquilino"] != NULL || $row_pago["id_inquilino"] != "") {
                                                             $id_inquilino = $row_pago["id_inquilino"];
+
+                                                            // echo "ID INQUILINO: ".$id_inquilino."<br>";
+
                                                             $sql_inquilino = "SELECT * FROM inquilino WHERE id = " . $id_inquilino;
                                                             $result_inquilino = mysqli_query($conn, $sql_inquilino);
                                                             if (mysqli_num_rows($result_inquilino) > 0) {
@@ -808,8 +819,8 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                 ' . $name_depa . '
                                                 </a>
                                                 </td>';
-                                                echo '<input type="hidden" id="id_inquilino0" class="form-control" value="'.$id_inquilino.'" />';
-                                                echo '<input type="hidden" id="id_inmueble0" class="form-control" value="'.$id_inmueble.'" />';
+                                                echo '<input type="hidden" id="id_inquilino" class="form-control" value="' . $id_inquilino . '" />';
+                                                echo '<input type="hidden" id="id_inmueble" class="form-control" value="' . $id_inmueble . '" />';
 
                                                 echo "<td> $" . $price_depa . "</td>";
 
@@ -896,44 +907,50 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                     <!--
                                     <input name="mySubmit" style="float: right;" class="btn btn-primary"
                                                     type="submit" value="Agregar pago" /> -->
-                    <input type="hidden" id="id_inquilino1" class="form-control" />
-                    <input type="hidden" id="id_inmueble1" class="form-control" />
+                    <input type="hidden" id="id_inquilino" class="form-control" />
+                    <input type="hidden" id="id_inmueble" class="form-control" />
 
 
 
 
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddPaymentModal"
-                        data-dismiss="modal" data-idinquilino="<?php echo $id_inquilino; ?>" data-idinmueble="<?php echo $id_inmueble; ?>">Agregar
+                        data-dismiss="modal" data-idinquilino="<?php echo $id_inquilino; ?>"
+                        data-idinmueble="<?php echo $id_inmueble; ?>">Agregar
                         pago</button>
                 </div>
                 <!----------------- TABS --------------------->
+                <form action="updatedata.php" method="POST">
+
+                    <div class="row">
+                        <div class="col-md-12 purplebg m">
+                            <input type="hidden" name="id_inmueble" id="id_inmueble"
+                                value="<?php echo $id_inmueble; ?>">
+                            <div class="tabbable">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="nav-item active"><a class="nav-link active"
+                                            href="#home" aria-controls="home" role="tab"
+                                            data-toggle="tab">Departamento</a>
+                                    </li>
+                                    <li role="presentation"><a class="nav-link" href="#profile" aria-controls="profile"
+                                            role="tab" data-toggle="tab">Inquilino</a>
+                                    </li>
+                                    <li role="presentation"><a class="nav-link" href="#messages"
+                                            aria-controls="messages" role="tab" data-toggle="tab">Facturación</a>
+                                    </li>
+                                    <li role="presentation"><a class="nav-link" href="#settings"
+                                            aria-controls="settings" role="tab" data-toggle="tab">Historial</a>
+                                    </li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">
+                                        <div class="modal-body">
 
 
-                <div class="row">
-                    <div class="col-md-12 purplebg m">
-                        <div class="tabbable">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="nav-item active"><a class="nav-link active" href="#home"
-                                        aria-controls="home" role="tab" data-toggle="tab">Departamento</a>
-                                </li>
-                                <li role="presentation"><a class="nav-link" href="#profile" aria-controls="profile"
-                                        role="tab" data-toggle="tab">Inquilino</a>
-                                </li>
-                                <li role="presentation"><a class="nav-link" href="#messages" aria-controls="messages"
-                                        role="tab" data-toggle="tab">Facturación</a>
-                                </li>
-                                <li role="presentation"><a class="nav-link" href="#settings" aria-controls="settings"
-                                        role="tab" data-toggle="tab">Historial</a>
-                                </li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    <div class="modal-body">
-
+                                            <!--
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -944,70 +961,86 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                 <a class="dropdown-item" href="#">Local</a>
                                             </div>
                                         </div>
-                                        <br><br>
-                                        <input type="text" id="name_depa" placeholder="Nombre"
-                                            class="form-control" /></input>
-                                        <br>
-                                        <input type="text" id="price_depa" placeholder="Renta" class="form-control" />
-                                        <br>
-                                        <input type="text" id="predial_depa" placeholder="No. predial"
-                                            class="form-control" /> <br>
-                                        <input type="text" placeholder=".png .jpeg" class="form-control" value="" />
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
-                                            imagen</button><br><br>
-                                        <input type="text" placeholder="contrato en formato pdf" class="form-control"
-                                            value="" />
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
-                                            PDF</button>
-                                        <br><br>
+                                        --->
 
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Servicios</label>
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    Agua
-                                                </label>
+
+                                            <select id="tipo_inmueble" name="tipo_inmueble" class="btn btn-primary">
+                                                <option value="1">Departamento</option>
+                                                <option value="2">Local</option>
+                                            </select>
+
+
+
+                                            <br><br>
+                                            <input type="text" id="name_depa" name="name_depa" placeholder="Nombre"
+                                                class="form-control" /></input>
+                                            <br>
+                                            <input type="text" id="price_depa" name="price_depa" placeholder="Renta"
+                                                class="form-control" />
+                                            <br>
+                                            <input type="text" id="predial_depa" name="predial_depa"
+                                                placeholder="No. predial" class="form-control" /> <br>
+                                            <input type="text" placeholder=".png .jpeg" class="form-control" value="" />
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
+                                                imagen</button><br><br>
+                                            <input type="text" placeholder="contrato en formato pdf"
+                                                class="form-control" value="" />
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cargar
+                                                PDF</button>
+                                            <br><br>
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Servicios</label>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Agua
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Luz
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault" checked>
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        Internet
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked">
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Gas
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckChecked" checked>
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                    Luz
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" checked>
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    Internet
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckChecked">
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                    Gas
-                                                </label>
-                                            </div>
+
                                         </div>
-
                                     </div>
-                                </div>
 
 
 
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                    <div class="modal-body">
+                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                        <div class="modal-body">
 
 
-                                        <input type="text" id="name_inq" placeholder="Nombre" class="form-control" />
-                                        <br>
-                                        <input type="text" id="apellidos_inq" placeholder="Apellidos"
-                                            class="form-control" />
-                                        <br>
+                                            <input type="text" id="name_inq" name="name_inq" placeholder="Nombre"
+                                                class="form-control" />
+                                            <br>
+                                            <input type="text" id="apellidos_inq" name="apellidos_inq"
+                                                placeholder="Apellidos" class="form-control" />
+                                            <br>
+
+
+                                            <!---
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary dropdown-toggle"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1018,148 +1051,228 @@ inmueble.id_tipo as id_tipo, inmueble.dia_pago as dia_pago, inmueble.id_imagen a
                                                 <a class="dropdown-item" href="#">Persona Moral</a>
                                             </div>
                                         </div>
-                                        <br>
-                                        <br>
+                                        ---->
 
-                                        <div class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Facturación</label>
+
+                                            <select id="tipo_persona_inquilino" name="tipo_persona_inquilino"
+                                                class="btn btn-primary">
+                                                <option value="1">Persona Física</option>
+                                                <option value="2">Persona Moral</option>
+                                            </select>
+
+
+
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="facturar"
+                                                    name="facturar">
+                                                <label class="form-check-label" for="exampleCheck1">Facturación</label>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Día de pago</label>
+                                                <input type="text" id="dia_pago" name="dia_pago" placeholder="Día"
+                                                    class="form-control" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Último pago</label>
+                                                <input type="text" id="ultimo_pago" name="ultimo_pago"
+                                                    placeholder="Fecha" class="form-control" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Comentarios</label>
+                                                <textarea class="form-control" id="comment_inquilino"
+                                                    name="comment_inquilino" rows="2"></textarea>
+                                            </div>
+
                                         </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="messages">
+
+                                        <div class="modal-body">
 
 
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Día de pago</label>
-                                            <input type="text" id="dia_pago" placeholder="Día" class="form-control" />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Último pago</label>
-                                            <input type="text" id="ultimo_pago" placeholder="Fecha"
+                                            <input type="text" id="rfc" name="rfc" placeholder="RFC"
                                                 class="form-control" />
-                                        </div>
+                                            <br>
+                                            <input type="text" id="razon_social" name="razon_social"
+                                                placeholder="Razón Social" class="form-control" />
+                                            <br>
+                                            <input type="text" id="fact_correo" name="fact_correo"
+                                                placeholder="Correo electrónico" class="form-control" />
+                                            <br>
 
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Comentarios</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                rows="2"></textarea>
+                                            <label for="exampleFormControlTextarea1">Régimen
+                                                Físcal</label><br>
+                                            <div class="btn-group">
+
+                                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    601
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">601</a>
+                                                    <a class="dropdown-item" href="#">603</a>
+                                                </div>
+                                            </div>
+
+                                            <br><br>
+
+                                            <label for="exampleFormControlTextarea1">CFDI</label><br>
+                                            <div class="btn-group">
+
+                                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    G01
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">G01</a>
+                                                    <a class="dropdown-item" href="#">G02</a>
+                                                </div>
+                                            </div>
+
+
+                                            <br><br>
+
+                                            <label for="exampleFormControlTextarea1">Tipo de pago</label><br>
+                                            <div class="btn-group">
+
+                                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Efectivo
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Efectivo</a>
+                                                    <a class="dropdown-item" href="#">Transferencia</a>
+                                                    <a class="dropdown-item" href="#">Depósito</a>
+                                                    <a class="dropdown-item" href="#">Cheque</a>
+                                                </div>
+                                            </div>
+
+                                            <br><br>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Dirección</label>
+                                                <textarea class="form-control" id="fact_direccion" name="fact_direccion"
+                                                    rows="2"></textarea>
+                                            </div>
+
                                         </div>
 
                                     </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="messages">
+                                    <div role="tabpanel" class="tab-pane" id="settings">
+                                        <div class="modal-body">
 
-                                    <div class="modal-body">
+                                            <table class="table table-bordered" id="dataTable" width="100%"
+                                                cellspacing="0">
+
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Fecha</th>
+                                                        <th>Tipo pago</th>
+                                                        <th>Cantidad</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <?php
+
+                                                        if (($id_inmueble != null || $id_inmueble != "") && ($id_inquilino != null || $id_inquilino != "")) {
+                                                            echo "HAY IDS <BR>";
+                                                            $sqlRegPagos = "SELECT * FROM registro_pagos WHERE id_inmueble = $id_inmueble AND id_inquilino = $id_inquilino";
+                                                            $result_regPagos = mysqli_query($conn, $sqlRegPagos);
+                                                            if (mysqli_num_rows($result_regPagos) > 0) {
+                                                                echo "HAY REGISTROS <BR>";
+                                                                while ($row_regPago = mysqli_fetch_assoc($result_regPagos)) {
+                                                                    echo '<td>';
+                                                                    echo $row_regPago["fecha_ult_pago"];
+                                                                    echo '</td>';
+
+                                                                    echo '<td>';
+
+                                                                    $tipopago1 = "";
+                                                                    $varpago = $row_regPago["id_tipo"];
+                                                                    if ($varpago == 1) {
+                                                                        $tipopago1 = "Efectivo";
+                                                                    } else if ($varpago == 2) {
+                                                                        $tipopago1 = "Transferenica";
+                                                                    } else if ($varpago == 3) {
+                                                                        $tipopago1 = "Depósito";
+                                                                    } else if ($varpago == 4) {
+                                                                        $tipopago1 = "Cheque";
+                                                                    }
+
+                                                                    echo $tipopago1;
+                                                                    echo '</td>';
+
+                                                                    echo '<td>';
+                                                                    echo $row_regPago["cantidad_pago"];
+                                                                    echo '</td>';
+                                                                }
+                                                            } else {
+                                                                echo "NO HAY REGISTROS <BR>";
+                                                                echo '<td></td>';
+                                                                echo '<td></td>';
+                                                                echo '<label for="exampleFormControlTextarea1">No hay registros</label><br>';
+                                                            }
+                                                        }
+
+                                                        else{
+                                                            echo "NO HAY IDS <BR>";
+                                                            echo '<td></td>';
+                                                            echo '<td></td>';
+                                                            echo '<label for="exampleFormControlTextarea1">No hay registros</label><br>';
+                                                        }
 
 
-                                        <input type="text" id="rfc" placeholder="RFC" class="form-control" />
-                                        <br>
-                                        <input type="text" id="razon_social" placeholder="Razón Social"
-                                            class="form-control" />
-                                        <br>
-                                        <input type="text" id="fact_correo" placeholder="Correo electrónico"
-                                            class="form-control" />
-                                        <br>
-                                        <label for="exampleFormControlTextarea1">Régimen
-                                            Físcal</label><br>
-                                        <div class="btn-group">
 
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                601
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">601</a>
-                                                <a class="dropdown-item" href="#">603</a>
-                                            </div>
+
+
+
+                                                        ?>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+
+
+
+
                                         </div>
-
-                                        <br><br>
-
-                                        <label for="exampleFormControlTextarea1">CFDI</label><br>
-                                        <div class="btn-group">
-
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                G01
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">G01</a>
-                                                <a class="dropdown-item" href="#">G02</a>
-                                            </div>
-                                        </div>
-
-
-                                        <br><br>
-
-                                        <label for="exampleFormControlTextarea1">Tipo de pago</label><br>
-                                        <div class="btn-group">
-
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Efectivo
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Efectivo</a>
-                                                <a class="dropdown-item" href="#">Transferencia</a>
-                                                <a class="dropdown-item" href="#">Depósito</a>
-                                                <a class="dropdown-item" href="#">Cheque</a>
-                                            </div>
-                                        </div>
-
-                                        <br><br>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Dirección</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                rows="2"></textarea>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="settings">
-                                    <div class="modal-body">
-
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-
-                                            <thead>
-                                                <tr>
-                                                    <th>Día</th>
-                                                    <th>Cantidad</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-
-
-                                        <label for="exampleFormControlTextarea1">No hay
-                                            registros</label><br>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <button type="button" style="float: right; margin-right: 1em;" class="btn btn-secondary"
+                        data-dismiss="modal">Eliminar</button>
+                    <input name="mySubmit" style="float: right; margin-right: 1em;" class="btn btn-primary"
+                        type="submit" value="Guardar" />
+
+                </form>
 
                 <!---------------------- END TAB ------------------>
 
                 <!----------------------------- MODAL BODY ------------------------------->
 
                 <!----------------------------- END MODAL BODY ------------------------>
-
-
+                <!--
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Guardar</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar</button>
+
                 </div>
+                 ---->
+                <br>
             </div>
 
         </div>
@@ -1263,14 +1376,14 @@ $(e.currentTarget).find('input[name="name_depa"]').val(name_depa);
     </script>
 
     <script type="text/javascript">
-                        var submitButton = $("#link_to_modal");
-                        submitButton.click(function () {
-                         var idinquilino = $("#id_inquilino0").val();
-                         var idinmueble = $("#id_inmueble0").val();
-                          console.log("*****VALUE******");
-                          console.log(idinquilino);
-                          console.log(idinmueble);
-                        });
+        var submitButton = $("#link_to_modal");
+        submitButton.click(function () {
+            var idinquilino = $("#id_inquilino0").val();
+            var idinmueble = $("#id_inmueble0").val();
+            console.log("*****VALUE******");
+            console.log(idinquilino);
+            console.log(idinmueble);
+        });
 
     </script>
 

@@ -1,5 +1,5 @@
 <?php
-//header("Location: tables.php");
+header("Location: tables.php");
 require_once('connections/conexion.php');
 
 // Create connection
@@ -37,8 +37,6 @@ $pagohecho = $total_renta - $cantidad_pago;
 
 echo "PAGO HECHO: ".$pagohecho."<br>";
 
-
-
 $sqlregrenta = "SELECT *  FROM registro_renta WHERE id_inmueble = $id_inmueble";
 $result_regrenta = mysqli_query($conn, $sqlregrenta);
 if(mysqli_num_rows($result_regrenta) > 0){
@@ -53,12 +51,8 @@ if(mysqli_num_rows($result_regrenta) > 0){
 
 }
 
-/*
-
-$sql2 = "INSERT INTO inmueble (nombre, id_tipo, dia_pago, precio_renta) VALUES('$nombre_local', $type_local, $dia_pago, $renta_local)";
-mysqli_query($conn, $sql2);
-
-*/
+$sqlpago = "INSERT INTO registro_pagos (id_inmueble, id_inquilino, id_tipo, cantidad_pago, fecha_pago, fecha_ult_pago) VALUES ($id_inmueble, $id_inquilino, $tipo_pago, $cantidad_pago, '$fecha_last_payment', '$fecha_last_payment')";
+mysqli_query($conn, $sqlpago);
 
 
 ?>
